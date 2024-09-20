@@ -29,22 +29,45 @@
 
 // 7.Vender criptomoedas: caso os dados estiverem corretos, exibir as informações da venda (incluindo a taxa cobrada) e pedir a confirmação do usuário
 
-
-
 int Login(){
     int resposta, cpf, senha;
-
-    printf("Bem_Vindes ao Login!\n");
-    printf("1. Novo Usuario ou 2. Login\n");
-    scanf("%d",&resposta);
-    if (resposta == 2){
         printf("CPF:");
         scanf("%d",&cpf);
         printf("SENHA: ");
         scanf("%d",&senha);
-        //if de vereficar se o cadastro esta correto para o login, caso sim mostrar o console novamente!
-        // if para novo login e colocar-lo no arquivo e chamar novamente o login
+    return 0;
+}
+
+int Novo_usuario(){
+    int resposta, cpf, senha, novo_cpf, nova_senha;
+
+    printf("Bem_Vindes ao Login!\n");
+    printf("1. Novo Usuario ou 2. Login\n");
+    printf("Digite: ");
+    printf(" ");
+    scanf("%d",&resposta);
+
+    if (resposta == 1){
+        printf("           OLÁ NOVO USUÁRIO           \n");
+        
+        // FILE *fptr;
+        // char ch;
+        // fptr = fopen("Novo_Usuario.txt", "w"); INICIEI O ARUIVO DO USUARIO
+
+        printf("Digite seu CPF: ");
+        scanf("%d", &novo_cpf);
+        printf("Digite sua SENHA: ");
+        scanf("%d", &nova_senha);
+
+        printf("Agora faça o Login!\n");
+        Login();
+
     }
+
+    if(resposta == 2){
+        Login();
+    }
+    return 0;
 
 }
 int Saldo(){
@@ -58,10 +81,35 @@ int Saldo(){
 }
 
 int Deposito(){
+    float valor_dep;
+    printf("^^^^^^^^^^^^^^^^^^Deposito^^^^^^^^^^^^^^^^^^^^^^\n");
+    printf("Qual seria o valor de deposito: ");
+    scanf("%f", &valor_dep);
+    return valor_dep;
 
 }
 int Saque(){
-
+    float valor_saq_pre, valor_saq;
+    int senha_conf;
+    printf("^^^^^^^^^^^^^^^^^^Saque^^^^^^^^^^^^^^^^^^^^^^\n");
+    printf("Qual seria o valor de deposito: ");
+    scanf("%f", &valor_saq_pre);
+    printf("Confirme a senha: ");
+    scanf("%d", &senha_conf);
+    //colocar a comparação da senha inserida com a do arquivo
+//     while (1){
+//     if (senha_conf != senha_do_arquivo){
+//         printf("Senha incorreta!\n");
+//         printf("Digite novamente: ");
+//         scanf("%d", &senha_conf);
+//     }else{
+//         valor_saq = valor_saq_pre;
+//         return valor_saq;
+//         break;
+//     }
+// }
+    
+    
 }
 int Console(){
     printf("````````````````````````````````````````````````````````````````````````````````````````````\n");
@@ -99,47 +147,24 @@ int Atualizar(){
     int numero_aleatorio = rand();//gerando numeros aleatorios
 
     // adicionando a variação para o valor da moeda
-    float cotacao1 =  (bitcoin * (numero_aleatorio % variacao))/ 100; // arrumar casas decimais e o valor em dele
-    float coatcao2 = (etherum * (numero_aleatorio % variacao))/ 100;
-    float cotacao3 = (ripple * (numero_aleatorio % variacao))/ 100;
+    float cotacao1 =  (bitcoin * (numero_aleatorio % variacao))/10; 
+    float coatcao2 = (etherum * (numero_aleatorio % variacao))/10;
+    float cotacao3 = (ripple * (numero_aleatorio % variacao))/10; //reavaliar a conta
 
     printf("^^^^^^^^^^^^^^^Cotação Atualizada^^^^^^^^^^^^^^^^^\n");
-    printf("Bitcoin: %f\n", cotacao1);
-    printf("Etherum: %f\n", coatcao2);
-    printf("Ripple: %f\n", cotacao3);
+    printf("Bitcoin: %.2f\n", cotacao1);
+    printf("Etherum: %.2f\n", coatcao2);
+    printf("Ripple: %.2f\n", cotacao3);
 
     return cotacao1; coatcao2; cotacao3;  
 
 }
 
 int main(){
-    int escolha;
     srand(time(NULL));//pega o horario do computador para gerar cada vez que rodar um numero diferente do outro
+    Novo_usuario();
 
-    Console();
-    printf("Opção:");
-    scanf("%d", &escolha);
-    switch(escolha) {
-        case 1:
-            Login();
-        case 2:
-            Saldo();
-        case 3:
-            Extrato();
-        case 4:
-            Deposito();
-        case 5:
-            Saque();
-        case 6:
-            ComprarC();
-        case 7:
-            VenderC();
-        case 8:
-            Atualizar();
-        case 9:
-            break;
-    }
-
+    
+    
     return 0;
 }
-
